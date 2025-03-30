@@ -15,17 +15,17 @@ const AuthSignIn: FC = memo(() => {
   const [error, setError] = useState<string>("");
 
   const login = async () => {
-    const res = await loginUser({ name, password });
-    if (!res.status) {
-      const errorMessage = res.message;
-      setError(errorMessage);
-    } else {
-      const token = res.data;
-      setName("");
-      setPassword("");
-      setError("");
-      // dispatch(setMainTokenAction(token));
-    }
+    // const res = await loginUser({ name, password });
+    // if (!res.status) {
+    //   const errorMessage = res.message;
+    //   setError(errorMessage);
+    // } else {
+    //   const token = res.data;
+    //   setName("");
+    //   setPassword("");
+    //   setError("");
+    //   // dispatch(setMainTokenAction(token));
+    // }
   };
   return (
     <>
