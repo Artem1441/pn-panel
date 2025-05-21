@@ -4,17 +4,26 @@ import Image from "next/image";
 import Link from "next/link";
 import { FC, memo, useState } from "react";
 import routes from "@/data/routes";
+import apiAuthSignIn from "@/api/auth/apiAuthSignIn.api";
+import Input from "@/shared/Input";
+import { useAppSelector } from "@/hooks/useAppSelector";
+import { authSlice } from "@/store/reducers/auth.reducer";
+import { NextRouter, useRouter } from "next/router";
 
 const AuthSignIn: FC = memo(() => {
+  const router: NextRouter = useRouter();
   const dispatch = useAppDispatch();
-  //   const { name, password, error } = useSelector(
-  //     (state: IReducers) => state.AuthReducer
-  //   );
-  const [name, setName] = useState<string>("");
-  const [password, setPassword] = useState<string>("");
-  const [error, setError] = useState<string>("");
+  const { setAuthLoginAction, setAuthPasswordAction, setAuthErrorAction } =
+    authSlice.actions;
 
-  const login = async () => {
+  const { login, password, error } = useAppSelector(
+    (state) => state.authReducer
+  );
+  // const [login, setLogin] = useState<string>("");
+  // const [password, setPassword] = useState<string>("");
+  // const [error, setError] = useState<string>("");
+
+  const signIn = async () => {
     // const res = await loginUser({ name, password });
     // if (!res.status) {
     //   const errorMessage = res.message;
@@ -26,6 +35,16 @@ const AuthSignIn: FC = memo(() => {
     //   setError("");
     //   // dispatch(setMainTokenAction(token));
     // }
+
+    const res = await apiAuthSignIn({ login, password });
+
+    if (res.status) {
+      router.push(routes.index);
+      dispatch(setAuthErrorAction(""));
+    } else {
+      dispatch(setAuthErrorAction(res.error || ""));
+    }
+    console.log(res);
   };
   return (
     <>
@@ -39,32 +58,33 @@ const AuthSignIn: FC = memo(() => {
 
           <div className={(styles.authSignIn_input, styles.authSignIn_center)}>
             <div className={styles.authSignIn_wrap}>
-              <input
-                type="text"
-                placeholder="Имя или номер телефона"
-                value={name}
-                onChange={(e) => setName(e.target.value)}
+              <Input
+                placeholder="Логин"
+                value={login}
+                onChange={(e) => dispatch(setAuthLoginAction(e.target.value))}
               />
             </div>
           </div>
           <div className={(styles.authSignIn_input, styles.authSignIn_center)}>
             <div className={styles.authSignIn_wrap}>
-              <input
+              <Input
                 type="password"
                 placeholder="Пароль"
                 value={password}
-                onChange={(e) => setPassword(e.target.value)}
+                onChange={(e) =>
+                  dispatch(setAuthPasswordAction(e.target.value))
+                }
               />
             </div>
           </div>
 
-          {error && (
+          {error ? (
             <div className={styles.authSignIn_center}>
               <div className={styles.authSignIn_wrap}>
                 <div className={styles.authSignIn_error}>{error}</div>
               </div>
             </div>
-          )}
+          ) : null}
 
           <div className={styles.authSignIn_center}>
             <div className={styles.authSignIn_wrap}>
@@ -74,7 +94,7 @@ const AuthSignIn: FC = memo(() => {
 
           <div className={styles.authSignIn_center}>
             <div className={styles.authSignIn_wrap}>
-              <button onClick={login}>Войти</button>
+              <button onClick={signIn}>Войти</button>
             </div>
           </div>
 
@@ -92,61 +112,6 @@ const AuthSignIn: FC = memo(() => {
               <button className="button">Зарегистрироваться</button>
             </Link>
           </div>
-
-          {/* <div className="login_center">
-            <div className="login_wrap">
-              <div className="login_text">
-                Если Вы не зарегистрированы, то ознакомьтесь с договором
-                присоединения:
-              </div>
-            </div>
-          </div>
-
-
-
-
-       <div className="login_center">
-            <div className="login_wrap">
-              <div className="login_contact">
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-                eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut
-                enim ad minim veniam, quis nostrud exercitation ullamco laboris
-                nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor
-                in reprehenderit in voluptate velit esse cillum dolore eu fugiat
-                nulla pariatur. Excepteur sint occaecat cupidatat non proident,
-                sunt in culpa qui officia deserunt mollit anim id est laborum.
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-                eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut
-                enim ad minim veniam, quis nostrud exercitation ullamco laboris
-                nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor
-                in reprehenderit in voluptate velit esse cillum dolore eu fugiat
-                nulla pariatur. Excepteur sint occaecat cupidatat non proident,
-                sunt in culpa qui officia deserunt mollit anim id est laborum.
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-                eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut
-                enim ad minim veniam, quis nostrud exercitation ullamco laboris
-                nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor
-                in reprehenderit in voluptate velit esse cillum dolore eu fugiat
-                nulla pariatur. Excepteur sint occaecat cupidatat non proident,
-                sunt in culpa qui officia deserunt mollit anim id est laborum.
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-                eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut
-                enim ad minim veniam, quis nostrud exercitation ullamco laboris
-                nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor
-                in reprehenderit in voluptate velit esse cillum dolore eu fugiat
-                nulla pariatur. Excepteur sint occaecat cupidatat non proident,
-                sunt in culpa qui officia deserunt mollit anim id est laborum.
-              </div>
-            </div>
-          </div>
-
-          <div className="login_mt10  login_center">
-            <Link href="/welcome">
-              <button className="button">Ознакомлен (-а)</button>
-            </Link>
-          </div>
-
-          <div className="login_footer login_center">2024</div> */}
         </div>
       </div>
     </>

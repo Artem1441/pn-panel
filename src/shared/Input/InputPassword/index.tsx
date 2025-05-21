@@ -30,10 +30,10 @@ const InputPassword: FC<IInputPasswordProps> = memo(
         >
           {showPassword ? (
             // <Image src={eyeIcon.src} alt="eye" width={20} height={20} />
-            <>0</>
+            <>Unshow</>
           ) : (
             // <Image src={eyeOffIcon.src} alt="eyeOff" width={20} height={20} />
-            <>1</>
+            <>Show</>
           )}
         </div>
       </div>

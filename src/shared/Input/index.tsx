@@ -4,7 +4,7 @@ import InputPhone from "./InputPhone";
 import styles from "./Input.module.scss";
 
 interface IProps {
-  type?: "number" | "phone" | "password";
+  type?: "date" | "number" | "phone" | "password";
   placeholder: string;
   value: string;
   onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
@@ -35,7 +35,7 @@ const Input: FC<IProps> = memo(
     return (
       <input
         className={styles.input}
-        type={type === "number" ? "number" : "text"}
+        type={type === "number" ? "number" : type === "date" ? "date" : "text"}
         autoCapitalize="none"
         placeholder={placeholder}
         value={value}

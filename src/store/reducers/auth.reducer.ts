@@ -5,6 +5,8 @@ import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 
 const initialState: IAuthState = {
   stage: "accession agreement",
+  login: "",
+  password: "",
   name: "",
   surname: "",
   patronymic: "",
@@ -13,8 +15,8 @@ const initialState: IAuthState = {
   phone: "",
   email: "",
   passport: {
-    passport_number: "",
     passport_series: "",
+    passport_number: "",
     issue_date: "",
     issued_by: "",
     birthdate: "",
@@ -24,6 +26,9 @@ const initialState: IAuthState = {
   },
   bank_bik: "",
   bank_acc: "",
+  passport_main: "",
+  passport_registration: "",
+  photo_front: "",
   error: "",
 };
 
@@ -34,101 +39,146 @@ export const authSlice = createSlice({
     setAuthStageAction: (
       state: IAuthState,
       action: PayloadAction<StageType>
-    ) => {
+    ): void => {
       state.stage = action.payload;
     },
-    setAuthNameAction: (state: IAuthState, action: PayloadAction<string>) => {
+    setAuthLoginAction: (
+      state: IAuthState,
+      action: PayloadAction<string>
+    ): void => {
+      state.login = action.payload;
+    },
+    setAuthPasswordAction: (
+      state: IAuthState,
+      action: PayloadAction<string>
+    ): void => {
+      state.password = action.payload;
+    },
+    setAuthNameAction: (
+      state: IAuthState,
+      action: PayloadAction<string>
+    ): void => {
       state.name = action.payload;
     },
     setAuthSurnameAction: (
       state: IAuthState,
       action: PayloadAction<string>
-    ) => {
+    ): void => {
       state.surname = action.payload;
     },
     setAuthPatronymicAction: (
       state: IAuthState,
       action: PayloadAction<string>
-    ) => {
+    ): void => {
       state.patronymic = action.payload;
     },
-    setAuthPhoneAction: (state: IAuthState, action: PayloadAction<string>) => {
+    setAuthPhoneAction: (
+      state: IAuthState,
+      action: PayloadAction<string>
+    ): void => {
       state.phone = action.payload;
     },
-    setAuthEmailAction: (state: IAuthState, action: PayloadAction<string>) => {
+    setAuthEmailAction: (
+      state: IAuthState,
+      action: PayloadAction<string>
+    ): void => {
       state.email = action.payload;
     },
-    setAuthInnAction: (state: IAuthState, action: PayloadAction<string>) => {
+    setAuthInnAction: (
+      state: IAuthState,
+      action: PayloadAction<string>
+    ): void => {
       state.inn = action.payload;
     },
     setAuthConfirmationCodeSentAction: (
       state: IAuthState,
       action: PayloadAction<boolean>
-    ) => {
+    ): void => {
       state.confirmationCodeSent = action.payload;
-    },
-    setAuthPassportNumberAction: (
-      state: IAuthState,
-      action: PayloadAction<string>
-    ) => {
-      state.passport.passport_number = action.payload;
     },
     setAuthPassportSeriesAction: (
       state: IAuthState,
       action: PayloadAction<string>
-    ) => {
+    ): void => {
       state.passport.passport_series = action.payload;
+    },
+    setAuthPassportNumberAction: (
+      state: IAuthState,
+      action: PayloadAction<string>
+    ): void => {
+      state.passport.passport_number = action.payload;
     },
     setAuthIssueDateAction: (
       state: IAuthState,
       action: PayloadAction<string>
-    ) => {
+    ): void => {
       state.passport.issue_date = action.payload;
     },
     setAuthIssuedByAction: (
       state: IAuthState,
       action: PayloadAction<string>
-    ) => {
+    ): void => {
       state.passport.issued_by = action.payload;
     },
     setAuthBirthdateAction: (
       state: IAuthState,
       action: PayloadAction<string>
-    ) => {
+    ): void => {
       state.passport.birthdate = action.payload;
     },
     setAuthNationalityAction: (
       state: IAuthState,
       action: PayloadAction<string>
-    ) => {
+    ): void => {
       state.passport.nationality = action.payload;
     },
     setAuthRegistrationAddressAction: (
       state: IAuthState,
       action: PayloadAction<string>
-    ) => {
+    ): void => {
       state.passport.registration_address = action.payload;
     },
     setAuthResidentialAddressAction: (
       state: IAuthState,
       action: PayloadAction<string>
-    ) => {
+    ): void => {
       state.passport.residential_address = action.payload;
     },
 
     setAuthBankAccAction: (
       state: IAuthState,
       action: PayloadAction<string>
-    ) => {
+    ): void => {
       state.bank_acc = action.payload;
     },
     setAuthBankBikAction: (
       state: IAuthState,
       action: PayloadAction<string>
-    ) => {
+    ): void => {
       state.bank_bik = action.payload;
     },
-    setAuthErrorAction: (state: IAuthState, action: PayloadAction<string>) => {
+    setAuthPassportMainAction: (
+      state: IAuthState,
+      action: PayloadAction<string>
+    ): void => {
+      state.passport_main = action.payload;
+    },
+    setAuthPassportRegistrationAction: (
+      state: IAuthState,
+      action: PayloadAction<string>
+    ): void => {
+      state.passport_registration = action.payload;
+    },
+    setAuthPhotoFrontAction: (
+      state: IAuthState,
+      action: PayloadAction<string>
+    ): void => {
+      state.photo_front = action.payload;
+    },
+    setAuthErrorAction: (
+      state: IAuthState,
+      action: PayloadAction<string>
+    ): void => {
       state.error = action.payload;
     },
     // setUserIdAction: (

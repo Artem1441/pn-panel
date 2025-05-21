@@ -1,3 +1,4 @@
+import errors from "@/constants/errors";
 import IIdentificationData from "@/types/IIdentificationData.interface";
 import cleanPhone from "./cleanPhone";
 
@@ -7,40 +8,36 @@ const checkIdentificationData = ({
   phone,
   email,
   inn,
-}: IIdentificationData) => {
-  if (name.length < 2 || surname.length < 2)
+}: IIdentificationData): { status: boolean; error?: string } => {
+  if (!name.trim() || !surname.trim())
     return {
       status: false,
-      error: "Введите имя и фамилию",
+      error: errors.name_and_surname_invalid,
     };
 
   const cleanedPhone = cleanPhone(phone);
-  const phoneRegex = /^\+7\(\d{3}\)-\d{3}-\d{2}-\d{2}$/;
 
   if (
-    !cleanedPhone ||
-    cleanedPhone.length !== 11 ||
-    !phoneRegex.test(phone)
+    !/^\d{11}$/.test(cleanedPhone) ||
+    !/^\+7\(\d{3}\)-\d{3}-\d{2}-\d{2}$/.test(phone)
   ) {
     return {
       status: false,
-      error: "Введите полный номер телефона",
+      error: errors.phone_invalid,
     };
   }
 
-  const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-
-  if (!email || !emailRegex.test(email)) {
+  if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
     return {
       status: false,
-      error: "Некорректный формат email",
+      error: errors.email_invalid,
     };
   }
 
-  if (!inn)
+  if (!/^\d{12}$/.test(inn))
     return {
       status: false,
-      error: "Введите ИНН",
+      error: errors.inn_invalid,
     };
 
   return { status: true };

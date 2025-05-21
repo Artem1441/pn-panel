@@ -1,6 +1,6 @@
 interface IPassport {
-  passport_number: string;
   passport_series: string;
+  passport_number: string;
   issue_date: string;
   issued_by: string;
   birthdate: string;

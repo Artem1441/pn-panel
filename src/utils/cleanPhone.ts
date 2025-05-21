@@ -1,4 +1,4 @@
-const cleanPhone = (phone: string) => {
+const cleanPhone = (phone: string): string => {
   return phone.replace(/\D/g, "");
 };
 

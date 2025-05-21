@@ -1,8 +1,5 @@
-// import { apiAuthSignUpUpdateFullName } from "@/api/auth.api";
-import {
-  apiAuthSignUpConfirmCode,
-  apiAuthSignUpCreateUser,
-} from "@/api/auth.api";
+import apiAuthSignUpCheckIdentificationData from "@/api/auth/apiAuthSignUpCheckIdentificationData.api";
+import apiAuthSignUpConfirmCode from "@/api/auth/apiAuthSignUpConfirmCode.api";
 import { useAppDispatch } from "@/hooks/useAppDispatch";
 import { useAppSelector } from "@/hooks/useAppSelector";
 import Input from "@/shared/Input";
@@ -39,7 +36,7 @@ const AuthSignUpIdentificationData = () => {
   const [codePhone, setCodePhone] = useState("");
   const [codeEmail, setCodeEmail] = useState("");
 
-  const createUser = async () => {
+  const checkSignUpIdentificationData = async () => {
     const isCorrectData = checkIdentificationData({
       name,
       surname,
@@ -53,7 +50,7 @@ const AuthSignUpIdentificationData = () => {
       return dispatch(setAuthErrorAction(isCorrectData.error || ""));
     }
 
-    const res = await apiAuthSignUpCreateUser({
+    const res = await apiAuthSignUpCheckIdentificationData({
       name,
       surname,
       patronymic,
@@ -174,7 +171,7 @@ const AuthSignUpIdentificationData = () => {
       )}
 
       <p>{error}</p>
-      <button onClick={createUser}>Дальше</button>
+      <button onClick={checkSignUpIdentificationData}>Дальше</button>
     </>
   );
 };
