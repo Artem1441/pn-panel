@@ -1,9 +1,15 @@
 import { combineReducers, configureStore } from "@reduxjs/toolkit";
 import authReducer from "./reducers/auth.reducer";
+import notificationReducer from "./reducers/notification.reducer";
+import informationReducer from "./reducers/information.reducer";
+import studioReducer from "./reducers/studio.reducer";
 import generalReducer from "./reducers/general.reducer";
 
 const rootReducer = combineReducers({
   authReducer,
+  notificationReducer,
+  informationReducer,
+  studioReducer,
   generalReducer
 });
 

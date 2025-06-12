@@ -10,11 +10,13 @@ import apiAuthSignUpUpdatePhoto from "@/api/auth/apiAuthSignUpUpdatePhoto.api";
 import Camera from "@/components/Camera";
 import { useAppDispatch } from "@/hooks/useAppDispatch";
 import { useAppSelector } from "@/hooks/useAppSelector";
+import Image from "@/shared/Image";
 import Input from "@/shared/Input";
 import Portal from "@/shared/Portal";
 import { authSlice } from "@/store/reducers/auth.reducer";
 import checkPersonalData from "@/utils/checkPersonalData";
 import cleanPhone from "@/utils/cleanPhone";
+import getImageUrl from "@/utils/getImageUrl";
 import { useState } from "react";
 
 type PhotoType = "passport_main" | "passport_registration" | "photo_front" | "";
@@ -105,9 +107,8 @@ const AuthSignUpPersonalData = () => {
       bank_acc,
       passport_main,
       passport_registration,
-      photo_front
+      photo_front,
     });
-
 
     if (res.status) {
       dispatch(setAuthErrorAction(""));
@@ -216,37 +217,21 @@ const AuthSignUpPersonalData = () => {
       <p>{error}</p>
 
       <div>
-        {passport_main && (
-          <img
-            src={`${process.env.NEXT_PUBLIC_BACKEND_URL}/cloud/images/${passport_main}`}
-            alt=""
-            width={200}
-          />
-        )}
+        <Image src={getImageUrl(passport_main)} width={200} />
+
         <button onClick={() => setCamera("passport_main")}>
           основная страница паспорта
         </button>
       </div>
       <div>
-        {passport_registration && (
-          <img
-            src={`${process.env.NEXT_PUBLIC_BACKEND_URL}/cloud/images/${passport_registration}`}
-            alt=""
-            width={200}
-          />
-        )}
+        <Image src={getImageUrl(passport_registration)}  width={200} />
+
         <button onClick={() => setCamera("passport_registration")}>
           страница паспорта с пропиской
         </button>
       </div>
       <div>
-        {photo_front && (
-          <img
-            src={`${process.env.NEXT_PUBLIC_BACKEND_URL}/cloud/images/${photo_front}`}
-            alt=""
-            width={200}
-          />
-        )}
+        <Image src={getImageUrl(photo_front)}  width={200} />
         <button onClick={() => setCamera("photo_front")}>
           личное фото (анфас) на светлом фоне
         </button>

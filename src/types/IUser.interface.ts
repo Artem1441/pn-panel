@@ -29,7 +29,7 @@ interface IUser {
   locale: "ru" | "en";
   bank_bik?: string;
   bank_acc?: string;
-  birthdate?: Date;
+  // birthdate?: Date;
   address_reg?: string;
   passport?: {
     passport_series: string;
@@ -53,8 +53,6 @@ interface IUser {
     | "in the process of filling"
     | "under review"
     | "confirmed";
-  created_at: Date;
-  updated_at: Date;
 }
 
 export default IUser;

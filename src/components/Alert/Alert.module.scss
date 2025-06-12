@@ -1,0 +1,94 @@
+$overlay-bg: rgba(0, 0, 0, 0.5);
+$alert-bg: #fff;
+$confirm-btn-bg: #3085d6;
+$cancel-btn-bg: #aaa;
+$footer-color: #777;
+$box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+
+.alertOverlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: $overlay-bg;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 9999;
+  animation: fadeIn 0.3s ease-out;
+}
+
+.alertBox {
+  background: $alert-bg;
+  padding: 20px;
+  border-radius: 8px;
+  max-width: 500px;
+  width: 100%;
+  box-shadow: $box-shadow;
+  text-align: center;
+  animation: scaleIn 0.2s ease-out;
+}
+
+.alertIcon {
+  font-size: 3rem;
+  margin-bottom: 10px;
+}
+
+.alertContent {
+  h2 {
+    margin-top: 0;
+  }
+}
+
+.alertButtons {
+  margin-top: 20px;
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+}
+
+.confirmBtn,
+.cancelBtn {
+  padding: 10px 20px;
+  font-size: 1rem;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.confirmBtn {
+  background-color: $confirm-btn-bg;
+  color: white;
+}
+
+.cancelBtn {
+  background-color: $cancel-btn-bg;
+  color: white;
+}
+
+.alertFooter {
+  margin-top: 10px;
+  font-size: 0.9rem;
+  color: $footer-color;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes scaleIn {
+  from {
+    transform: scale(0.9);
+    opacity: 0;
+  }
+  to {
+    transform: scale(1);
+    opacity: 1;
+  }
+}

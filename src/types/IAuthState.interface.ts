@@ -1,5 +1,4 @@
 import IPassport from "./IPassport.interface";
-import RoleType from "./RoleType.type";
 import StageType from "./StageType.type";
 
 interface IAuthState {
@@ -10,7 +9,7 @@ interface IAuthState {
   surname: string;
   patronymic: string;
   inn: string;
-  confirmationCodeSent: boolean;
+  confirmation_code_sent: boolean;
   phone: string;
   email: string;
   passport: IPassport;

@@ -16,8 +16,6 @@ const apiAuthResetPasswordToken = async (
       }
     );
 
-    console.log(response.data);
-
     if (response.data.status) {
       return response.data;
     } else {

@@ -30,7 +30,7 @@ const AuthSignUpIdentificationData = () => {
     email,
     inn,
     error,
-    confirmationCodeSent,
+    confirmation_code_sent,
   } = useAppSelector((state) => state.authReducer);
 
   const [codePhone, setCodePhone] = useState("");
@@ -151,7 +151,7 @@ const AuthSignUpIdentificationData = () => {
         onChange={(e) => dispatch(setAuthInnAction(e.target.value))}
       />
 
-      {confirmationCodeSent && (
+      {confirmation_code_sent && (
         <>
           <Input
             type="number"

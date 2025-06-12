@@ -1,0 +1,14 @@
+.inputFile {
+  &_input {
+    display: none;
+  }
+
+  &_label {
+    display: inline-block;
+    padding: 10px 15px;
+    background: #eee;
+    cursor: pointer;
+    border-radius: 6px;
+    font-size: 14px;
+  }
+}

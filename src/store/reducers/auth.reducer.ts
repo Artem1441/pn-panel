@@ -11,7 +11,7 @@ const initialState: IAuthState = {
   surname: "",
   patronymic: "",
   inn: "",
-  confirmationCodeSent: false,
+  confirmation_code_sent: false,
   phone: "",
   email: "",
   passport: {
@@ -94,7 +94,7 @@ export const authSlice = createSlice({
       state: IAuthState,
       action: PayloadAction<boolean>
     ): void => {
-      state.confirmationCodeSent = action.payload;
+      state.confirmation_code_sent = action.payload;
     },
     setAuthPassportSeriesAction: (
       state: IAuthState,

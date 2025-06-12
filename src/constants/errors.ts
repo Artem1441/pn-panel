@@ -26,6 +26,10 @@ const errors = {
 
   password_mismatch: "Пароли должны совпадать",
   password_too_short: "Пароль должен содержать минимум 8 символов",
+
+  all_fields_required: "Все поля обязательны к заполнению",
+
+  studio_short_name_required: "Краткое название студии не должно быть пустым"
 };
 
 export default errors;

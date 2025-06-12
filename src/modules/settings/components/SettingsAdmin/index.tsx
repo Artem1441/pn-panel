@@ -1,9 +1,30 @@
+import apiNotificationAdminGetAllCount from "@/api/notification/apiNotificationAdminGetAllCount.api";
 import routes from "@/data/routes";
+import { useAppDispatch } from "@/hooks/useAppDispatch";
+import { useAppSelector } from "@/hooks/useAppSelector";
+import { notificationSlice } from "@/store/reducers/notification.reducer";
 import { NextRouter, useRouter } from "next/router";
-import { FC, JSX } from "react";
+import { FC, JSX, useEffect } from "react";
 
 const SettingsAdmin: FC = (): JSX.Element => {
   const router: NextRouter = useRouter();
+
+  const dispatch = useAppDispatch();
+  // const { setTotalNotificationsAction } = notificationSlice.actions;
+
+  // const { total_notifications } = useAppSelector(
+  //   (state) => state.notificationReducer
+  // );
+
+  // const notificationGetAllCount = async () => {
+  //   const res = await apiNotificationAdminGetAllCount();
+  //   if (!res.status) return 
+  //   dispatch(setTotalNotificationsAction(res.data || 0));
+  // };
+
+  useEffect(() => {
+    // notificationGetAllCount();
+  }, []);
 
   return (
     <>
@@ -12,7 +33,8 @@ const SettingsAdmin: FC = (): JSX.Element => {
         Информация
       </button>
       <button onClick={() => router.push(routes.settings_notifications)}>
-        Уведомления
+      Уведомления:
+        {/* Уведомления: {total_notifications} */}
       </button>
       <button onClick={() => router.push(routes.settings_specialtations)}>
         Специализации

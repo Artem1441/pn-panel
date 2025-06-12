@@ -1,14 +1,14 @@
 import { useAppDispatch } from "@/hooks/useAppDispatch";
 import styles from "./AuthSignIn.module.scss";
-import Image from "next/image";
 import Link from "next/link";
-import { FC, memo, useState } from "react";
+import { FC, memo } from "react";
 import routes from "@/data/routes";
 import apiAuthSignIn from "@/api/auth/apiAuthSignIn.api";
 import Input from "@/shared/Input";
 import { useAppSelector } from "@/hooks/useAppSelector";
 import { authSlice } from "@/store/reducers/auth.reducer";
 import { NextRouter, useRouter } from "next/router";
+import Image from "@/shared/Image";
 
 const AuthSignIn: FC = memo(() => {
   const router: NextRouter = useRouter();
@@ -40,9 +40,12 @@ const AuthSignIn: FC = memo(() => {
 
     if (res.status) {
       router.push(routes.index);
+      dispatch(setAuthLoginAction(""))
+      dispatch(setAuthPasswordAction(""))
       dispatch(setAuthErrorAction(""));
     } else {
       dispatch(setAuthErrorAction(res.error || ""));
+      dispatch(setAuthPasswordAction(""))
     }
     console.log(res);
   };
@@ -52,7 +55,7 @@ const AuthSignIn: FC = memo(() => {
         <div className="container">
           <div className={styles.authSignIn_center}>
             <Link href="/">
-              <Image src="/images/logo.png" alt="" width={240} height={200} />
+              <Image src="/images/logo.png" width={240} height={200} />
             </Link>
           </div>
 

@@ -1,8 +1,9 @@
-// import { apiAuthSignUpStage } from "@/api/auth.api";
 import apiAuthSignUpStage from "@/api/auth/apiAuthSignUpStage.api";
+import routes from "@/data/routes";
 import { useAppDispatch } from "@/hooks/useAppDispatch";
 import { useAppSelector } from "@/hooks/useAppSelector";
 import { authSlice } from "@/store/reducers/auth.reducer";
+import { NextRouter, useRouter } from "next/router";
 import { FC, memo, useEffect, useState } from "react";
 import AuthSignUpAccessionAgreement from "../AuthSignUpAccessionAgreement";
 import AuthSignUpAcquaintance from "../AuthSignUpAcquaintance";
@@ -11,6 +12,7 @@ import AuthSignUpPersonalData from "../AuthSignUpPersonalData";
 import AuthSignUpWaitingRoom from "../AuthSignUpWaitingRoom";
 
 const AuthSignUp: FC = memo(() => {
+  const router: NextRouter = useRouter();
   const dispatch = useAppDispatch();
   const { setAuthStageAction } = authSlice.actions;
   const { stage } = useAppSelector((state) => state.authReducer);
@@ -38,6 +40,10 @@ const AuthSignUp: FC = memo(() => {
   useEffect(() => {
     getSignUpStage();
   }, []);
+
+  if (stage === "home page") {
+    router.push(routes.index);
+  }
 
   return (
     <>
