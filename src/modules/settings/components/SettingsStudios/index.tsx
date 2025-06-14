@@ -1,5 +1,5 @@
 import { FC, JSX, memo, useEffect, useState } from "react";
-import apiStudioGetStudios from "@/api/studio/apiInformationGetInformation.api";
+import apiStudioGetStudios from "@/api/studio/apiStudioGetStudios.api";
 import apiStudioCreateStudio from "@/api/studio/apiStudioCreateStudio.api";
 import { useAppDispatch } from "@/hooks/useAppDispatch";
 import { useAppSelector } from "@/hooks/useAppSelector";

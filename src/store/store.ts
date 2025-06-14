@@ -3,6 +3,7 @@ import authReducer from "./reducers/auth.reducer";
 import notificationReducer from "./reducers/notification.reducer";
 import informationReducer from "./reducers/information.reducer";
 import studioReducer from "./reducers/studio.reducer";
+import cityReducer from "./reducers/city.reducer";
 import generalReducer from "./reducers/general.reducer";
 
 const rootReducer = combineReducers({
@@ -10,6 +11,7 @@ const rootReducer = combineReducers({
   notificationReducer,
   informationReducer,
   studioReducer,
+  cityReducer,
   generalReducer
 });
 

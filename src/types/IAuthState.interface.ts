@@ -1,7 +1,6 @@
 import IPassport from "./IPassport.interface";
 import StageType from "./StageType.type";
-
-interface IAuthState {
+export default interface IAuthState {
   stage: StageType;
   login: string;
   password: string;
@@ -20,5 +19,3 @@ interface IAuthState {
   photo_front: string;
   error: string;
 }
-
-export default IAuthState;

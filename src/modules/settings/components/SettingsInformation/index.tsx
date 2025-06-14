@@ -14,7 +14,7 @@ import getImageUrl from "@/utils/getImageUrl";
 import checkInformation from "@/utils/checkInformation";
 import errors from "@/constants/errors";
 
-const InformationChange = memo(({ data }: { data: IInformationChange }) => {
+const InformationChange: FC<{ data: IInformationChange }> = memo(({ data }) => {
   return (
     <div>
       <p>

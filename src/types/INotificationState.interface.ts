@@ -1,6 +1,5 @@
 import IUser from "./IUser.interface";
-
-interface INotificationState {
+export default interface INotificationState {
   total_notifications: {
     admin: number;
     archive: number;
@@ -15,5 +14,3 @@ interface INotificationState {
   archive_notifications: {};
   settings_notifications: {};
 }
-
-export default INotificationState;

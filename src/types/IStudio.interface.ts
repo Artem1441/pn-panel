@@ -1,4 +1,4 @@
-interface IStudio {
+export default interface IStudio {
   id?: number;
   name: string; // краткий адрес
 
@@ -16,7 +16,7 @@ interface IStudio {
   general_owner_phone: string;
   general_owner_email: string;
 
-  general_coowner_available:  boolean;
+  general_coowner_available: boolean;
   general_coowner_last_name: string;
   general_coowner_first_name: string;
   general_coowner_middle_name: string;
@@ -44,5 +44,3 @@ interface IStudio {
   general_sublease_contact_email: string;
   general_sublease_rent_price_per_sqm: string;
 }
-
-export default IStudio;

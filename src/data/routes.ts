@@ -10,6 +10,7 @@ const routes = {
 
   settings: "/settings",
   settings_information: "/settings/information",
+  settings_cities: "/settings/cities",
   settings_notifications: "/settings/notifications",
   settings_specialtations: "/settings/specialtations",
   settings_studios: "/settings/studios",

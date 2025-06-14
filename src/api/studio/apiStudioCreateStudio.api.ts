@@ -1,5 +1,4 @@
 import errors from "@/constants/errors";
-import IInformation from "@/types/IInformation.interface";
 import IResp from "@/types/IResp.interface";
 import IStudio from "@/types/IStudio.interface";
 import axios from "axios";
@@ -80,9 +79,9 @@ const apiStudioCreateStudio = async ({
   general_sublease_contact_middle_name: IStudio["general_sublease_contact_middle_name"];
   general_sublease_contact_phone: IStudio["general_sublease_contact_phone"];
   general_sublease_contact_email: IStudio["general_sublease_contact_email"];
-}): Promise<IResp<IInformation>> => {
+}): Promise<IResp<null>> => {
   try {
-    const response = await axios.post<IResp<IInformation>>(
+    const response = await axios.post<IResp<null>>(
       `${process.env.NEXT_PUBLIC_BACKEND_URL}/studio/createStudio`,
       {
         name,

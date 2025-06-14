@@ -1,4 +1,4 @@
-interface IIdentificationData {
+export default interface IIdentificationData {
   name: string;
   surname: string;
   patronymic: string;
@@ -6,4 +6,3 @@ interface IIdentificationData {
   email: string;
   inn: string;
 }
-export default IIdentificationData;

@@ -1,8 +1,4 @@
-
 import RoleType from "./RoleType.type";
-
-interface IGeneralState {
+export default interface IGeneralState {
   role: RoleType;
 }
-
-export default IGeneralState;

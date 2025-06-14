@@ -1,4 +1,4 @@
-interface IPassport {
+export default interface IPassport {
   passport_series: string;
   passport_number: string;
   issue_date: string;
@@ -8,5 +8,3 @@ interface IPassport {
   registration_address: string;
   residential_address: string;
 }
-
-export default IPassport;

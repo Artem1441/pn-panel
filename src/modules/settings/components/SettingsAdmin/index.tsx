@@ -32,6 +32,9 @@ const SettingsAdmin: FC = (): JSX.Element => {
       <button onClick={() => router.push(routes.settings_information)}>
         Информация
       </button>
+      <button onClick={() => router.push(routes.settings_cities)}>
+        Города
+      </button>
       <button onClick={() => router.push(routes.settings_notifications)}>
       Уведомления:
         {/* Уведомления: {total_notifications} */}

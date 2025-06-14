@@ -1,6 +1,5 @@
 import IPassport from "./IPassport.interface";
-
-interface IPersonalData {
+export default interface IPersonalData {
   passport: IPassport;
   bank_bik: string;
   bank_acc: string;
@@ -8,5 +7,3 @@ interface IPersonalData {
   passport_registration: string;
   photo_front: string;
 }
-
-export default IPersonalData;

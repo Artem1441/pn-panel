@@ -1,6 +1,6 @@
 import RoleType from "./RoleType.type";
 
-interface IUser {
+export default interface IUser {
   id: number;
   role: RoleType;
   login: string;
@@ -54,5 +54,3 @@ interface IUser {
     | "under review"
     | "confirmed";
 }
-
-export default IUser;
