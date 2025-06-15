@@ -1,0 +1,14 @@
+.inputSelect {
+  &::placeholder {
+    color: gray;
+  }
+
+  &.placeholderActive {
+    color: gray;
+  }
+
+  option:disabled {
+    color: gray;
+    background-color: #f9f9f9;
+  }
+}

@@ -1,5 +1,6 @@
 export default interface IStudio {
   id?: number;
+  city_id?: number;
   name: string; // краткий адрес
 
   general_full_address: string;

@@ -5,6 +5,7 @@ import axios from "axios";
 
 const apiStudioUpdateStudio = async ({
   id,
+  city_id,
   name,
   general_full_address,
   general_area,
@@ -43,7 +44,8 @@ const apiStudioUpdateStudio = async ({
   general_sublease_contact_phone,
   general_sublease_contact_email,
 }: {
-  id: IStudio["id"]
+  id: IStudio["id"];
+  city_id: IStudio["city_id"];
   name: IStudio["name"];
   general_full_address: IStudio["general_full_address"];
   general_area: IStudio["general_area"];
@@ -87,6 +89,7 @@ const apiStudioUpdateStudio = async ({
       `${process.env.NEXT_PUBLIC_BACKEND_URL}/studio/updateStudio`,
       {
         id,
+        city_id,
         name,
         general_full_address,
         general_area,

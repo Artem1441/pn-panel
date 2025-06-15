@@ -13,13 +13,17 @@ const InputSelect: FC<IProps> = memo(
     return (
       <select
         title={placeholder}
-        className={styles.input}
+        className={`${styles.inputSelect} ${
+          !value ? styles.placeholderActive : ""
+        }`}
         value={value}
         onChange={onChange}
       >
-        <option value="" disabled hidden>
-          {placeholder}
-        </option>
+        {!value && (
+          <option value="" disabled hidden>
+            {placeholder}
+          </option>
+        )}
         {options?.map((opt) => (
           <option key={opt.value} value={opt.value}>
             {opt.label}

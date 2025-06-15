@@ -29,7 +29,12 @@ const errors = {
 
   all_fields_required: "Все поля обязательны к заполнению",
 
-  studio_short_name_required: "Краткое название студии не должно быть пустым"
+  studio_city_required: "У студии должен быть выбран город",
+  studio_short_name_required: "Краткое название студии не должно быть пустым",
+  studio_date_invalid: "Дата указана некорректно",
+
+  city_short_name_required: "Название города не должно быть пустым"
+
 };
 
 export default errors;

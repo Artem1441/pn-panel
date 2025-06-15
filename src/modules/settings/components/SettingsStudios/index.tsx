@@ -11,11 +11,14 @@ import Alert from "@/components/Alert";
 import checkStudio from "@/utils/checkStudio";
 import apiStudioUpdateStudio from "@/api/studio/apiStudioUpdateStudio.api";
 import apiStudioDeleteStudio from "@/api/studio/apiStudioDeleteStudio.api";
+import ICity from "@/types/ICity.interface";
+import apiCityGetCities from "@/api/city/apiCityGetCities.api";
 
-const Studio: FC<{ data: IStudio; getStudios: () => void }> = ({
-  data,
-  getStudios,
-}): JSX.Element => {
+const Studio: FC<{
+  data: IStudio;
+  getStudios: () => void;
+  cities: ICity[];
+}> = ({ data, getStudios, cities }): JSX.Element => {
   const [studio, setStudio] = useState<IStudio>(data);
 
   const updateStudio = async () => {
@@ -24,6 +27,7 @@ const Studio: FC<{ data: IStudio; getStudios: () => void }> = ({
       try {
         const res = await apiStudioUpdateStudio({
           id: studio.id,
+          city_id: studio.city_id,
           name: studio.name,
           general_full_address: studio.general_full_address,
           general_area: studio.general_area,
@@ -117,7 +121,25 @@ const Studio: FC<{ data: IStudio; getStudios: () => void }> = ({
 
   return (
     <div>
+      <br />
+      <hr />
+      <br />
       <div>
+        <Input
+          placeholder="Выберите город"
+          type="select"
+          value={String(studio.city_id || "")}
+          onChange={(e) =>
+            setStudio({
+              ...studio,
+              city_id: Number(e.target.value),
+            })
+          }
+          options={cities.map((city: ICity) => ({
+            label: city.name,
+            value: String(city.id),
+          }))}
+        />
         <Input
           placeholder="Краткий адрес"
           value={studio.name}
@@ -542,11 +564,20 @@ const SettingsStudios: FC = memo((): JSX.Element => {
   const dispatch = useAppDispatch();
   const { setStudioAction, setResetStudioAction } = studioSlice.actions;
   const { studio } = useAppSelector((state) => state.studioReducer);
+  const [cities, setCities] = useState<ICity[]>([]);
   const [studios, setStudios] = useState<IStudio[]>([]);
 
   useEffect(() => {
     getStudios();
+    getCities();
   }, []);
+
+  const getCities = async () => {
+    const res = await apiCityGetCities();
+    if (res.status && res.data) {
+      setCities(res.data);
+    }
+  };
 
   const getStudios = async () => {
     const res = await apiStudioGetStudios();
@@ -558,6 +589,7 @@ const SettingsStudios: FC = memo((): JSX.Element => {
     if (isValid.status) {
       try {
         const res = await apiStudioCreateStudio({
+          city_id: studio.city_id,
           name: studio.name,
           general_full_address: studio.general_full_address,
           general_area: studio.general_area,
@@ -630,6 +662,24 @@ const SettingsStudios: FC = memo((): JSX.Element => {
   return (
     <>
       <div>
+        <Input
+          placeholder="Выберите город"
+          type="select"
+          value={String(studio.city_id || "")}
+          onChange={(e) =>
+            dispatch(
+              setStudioAction({
+                ...studio,
+                city_id: Number(e.target.value),
+              })
+            )
+          }
+          options={cities.map((city) => ({
+            label: city.name,
+            value: String(city.id),
+          }))}
+        />
+
         <Input
           placeholder="Краткий адрес"
           value={studio.name}
@@ -1127,7 +1177,12 @@ const SettingsStudios: FC = memo((): JSX.Element => {
       <Button onClick={createStudio}>Создать студию</Button>
 
       {studios.map((studio) => (
-        <Studio key={studio.id} data={studio} getStudios={getStudios} />
+        <Studio
+          key={studio.id}
+          data={studio}
+          getStudios={getStudios}
+          cities={cities}
+        />
       ))}
     </>
   );

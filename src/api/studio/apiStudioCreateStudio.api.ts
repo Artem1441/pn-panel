@@ -4,6 +4,7 @@ import IStudio from "@/types/IStudio.interface";
 import axios from "axios";
 
 const apiStudioCreateStudio = async ({
+  city_id,
   name,
   general_full_address,
   general_area,
@@ -42,6 +43,7 @@ const apiStudioCreateStudio = async ({
   general_sublease_contact_phone,
   general_sublease_contact_email,
 }: {
+  city_id: IStudio["city_id"];
   name: IStudio["name"];
   general_full_address: IStudio["general_full_address"];
   general_area: IStudio["general_area"];
@@ -84,6 +86,7 @@ const apiStudioCreateStudio = async ({
     const response = await axios.post<IResp<null>>(
       `${process.env.NEXT_PUBLIC_BACKEND_URL}/studio/createStudio`,
       {
+        city_id,
         name,
         general_full_address,
         general_area,
