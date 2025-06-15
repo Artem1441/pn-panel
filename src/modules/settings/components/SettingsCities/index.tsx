@@ -11,6 +11,7 @@ import Input from "@/shared/Input";
 import { citySlice } from "@/store/reducers/city.reducer";
 import ICity from "@/types/ICity.interface";
 import checkCity from "@/utils/checkCity";
+import errors from "@/constants/errors";
 
 const City: FC<{ data: ICity; getCities: () => void }> = memo(
   ({ data, getCities }): JSX.Element => {
@@ -59,7 +60,7 @@ const City: FC<{ data: ICity; getCities: () => void }> = memo(
         } else {
           Alert.show({
             title: "Что-то пошлое не так",
-            text: "Ошибка при удалении",
+            text: res.error,
             icon: "error",
           });
         }
@@ -67,7 +68,7 @@ const City: FC<{ data: ICity; getCities: () => void }> = memo(
         console.log(err);
         Alert.show({
           title: "Что-то пошлое не так",
-          text: "Ошибка при удалении",
+          text: errors.network_error,
           icon: "error",
         });
       }
@@ -84,8 +85,8 @@ const City: FC<{ data: ICity; getCities: () => void }> = memo(
         </div>
 
         <div>
-          <Button onClick={updateCity}>Обновить студию</Button>
-          <Button onClick={deleteCity}>Удалить студию</Button>
+          <Button onClick={updateCity}>Обновить город</Button>
+          <Button onClick={deleteCity}>Удалить город</Button>
         </div>
       </>
     );
@@ -121,7 +122,7 @@ const SettingsCities: FC = memo((): JSX.Element => {
         } else {
           Alert.show({
             title: "Что-то пошлое не так",
-            text: isValid.error,
+            text: res.error,
             icon: "error",
           });
         }
@@ -152,7 +153,7 @@ const SettingsCities: FC = memo((): JSX.Element => {
           }
         />
 
-        <Button onClick={createCity}>Создать</Button>
+        <Button onClick={createCity}>Создать город</Button>
 
         {cities.map((city) => (
           <City key={city.id} data={city} getCities={getCities} />
