@@ -6,6 +6,7 @@ import InputTextarea from "./InputTextarea";
 import InputFile from "./InputFile";
 import UploadFileType from "@/types/UploadFileType.type";
 import InputSelect from "./InputSelect";
+import InputBoolean from "./InputBoolean";
 
 interface IProps {
   type?:
@@ -15,9 +16,10 @@ interface IProps {
     | "password"
     | "textarea"
     | "file"
-    | "select";
+    | "select"
+    | "boolean";
   placeholder: string;
-  value: string;
+  value: string | boolean;
   onChange: (
     e: React.ChangeEvent<
       HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement
@@ -38,6 +40,19 @@ const Input: FC<IProps> = memo(
     maxSizeMb,
     options,
   }): JSX.Element => {
+    if (typeof value === "boolean") {
+      if (type === "boolean") {
+        return (
+          <InputBoolean
+            value={value}
+            placeholder={placeholder}
+            onChange={onChange}
+          />
+        );
+      }
+      return <></>;
+    }
+
     if (type === "textarea") {
       return (
         <InputTextarea
@@ -46,8 +61,7 @@ const Input: FC<IProps> = memo(
           onChange={onChange}
         />
       );
-    }
-    if (type === "password") {
+    } else if (type === "password") {
       return (
         <InputPassword
           placeholder={placeholder}
@@ -55,9 +69,7 @@ const Input: FC<IProps> = memo(
           onChange={onChange}
         />
       );
-    }
-
-    if (type === "phone") {
+    } else if (type === "phone") {
       return (
         <InputPhone
           placeholder={placeholder}
@@ -65,8 +77,7 @@ const Input: FC<IProps> = memo(
           onChange={onChange}
         />
       );
-    }
-    if (type === "file") {
+    } else if (type === "file") {
       return (
         <InputFile
           placeholder={placeholder}
@@ -75,9 +86,7 @@ const Input: FC<IProps> = memo(
           maxSizeMb={maxSizeMb}
         />
       );
-    }
-
-    if (type === "select") {
+    } else if (type === "select") {
       return (
         <InputSelect
           value={value}

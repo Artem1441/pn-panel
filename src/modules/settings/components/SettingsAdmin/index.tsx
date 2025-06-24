@@ -48,6 +48,9 @@ const SettingsAdmin: FC = (): JSX.Element => {
       <button onClick={() => router.push(routes.settings_complectations)}>
         Комплектация
       </button>
+      <button onClick={() => router.push(routes.settings_price_list)}>
+        Прайс-лист
+      </button>
       <button onClick={() => router.push(routes.settings_motivation)}>
         Мотивации
       </button>

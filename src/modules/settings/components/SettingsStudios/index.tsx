@@ -1176,7 +1176,7 @@ const SettingsStudios: FC = memo((): JSX.Element => {
 
       <Button onClick={createStudio}>Создать студию</Button>
 
-      {studios.map((studio) => (
+      {studios.map((studio: IStudio) => (
         <Studio
           key={studio.id}
           data={studio}

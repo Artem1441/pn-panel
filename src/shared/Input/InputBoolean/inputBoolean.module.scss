@@ -1,0 +1,9 @@
+.inputBoolean {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  
+    input[type="checkbox"] {
+      margin: 0;
+    }
+  }
