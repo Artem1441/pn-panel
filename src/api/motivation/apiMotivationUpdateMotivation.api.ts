@@ -1,21 +1,30 @@
 import errors from "@/constants/errors";
-import IInformation from "@/types/IInformation.interface";
+import IMotivation from "@/types/IMotivation.interface";
 import IResp from "@/types/IResp.interface";
 import axios from "axios";
 
-const apiInformationUpdateInformation = async (
-  information: IInformation
-): Promise<IResp<IInformation>> => {
+const apiMotivationUpdateMotivation = async ({
+  id,
+  allowance_data,
+  deduction_data,
+}: {
+  id: IMotivation["id"];
+  allowance_data: IMotivation["allowance_data"];
+  deduction_data: IMotivation["deduction_data"];
+}): Promise<IResp<IMotivation>> => {
   try {
-    const response = await axios.put<IResp<IInformation>>(
-      `${process.env.NEXT_PUBLIC_BACKEND_URL}/information/updateInformation`,
+    const response = await axios.put<IResp<IMotivation>>(
+      `${process.env.NEXT_PUBLIC_BACKEND_URL}/motivation/updateMotivation`,
       {
-        information,
+        id,
+        allowance_data,
+        deduction_data,
       },
       {
         withCredentials: true,
       }
     );
+
 
     if (response.data.status) {
       return response.data;
@@ -40,4 +49,4 @@ const apiInformationUpdateInformation = async (
   }
 };
 
-export default apiInformationUpdateInformation;
+export default apiMotivationUpdateMotivation;

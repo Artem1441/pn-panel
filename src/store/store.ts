@@ -6,6 +6,7 @@ import studioReducer from "./reducers/studio.reducer";
 import cityReducer from "./reducers/city.reducer";
 import priceReducer from "./reducers/price.reducer";
 import generalReducer from "./reducers/general.reducer";
+import motivationReducer from "./reducers/motivation.reducer";
 
 const rootReducer = combineReducers({
   authReducer,
@@ -14,7 +15,8 @@ const rootReducer = combineReducers({
   studioReducer,
   cityReducer,
   priceReducer,
-  generalReducer
+  motivationReducer,
+  generalReducer,
 });
 
 export const setupStore = () => {
