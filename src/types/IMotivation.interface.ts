@@ -11,3 +11,6 @@ export interface IMotivationDataItem {
 }
 
 export type ArrayMotivationDataFieldKey = "allowance_data" | "deduction_data";
+export interface IMotivationState {
+  motivation: IMotivation;
+}

@@ -1,5 +1,4 @@
-import IStudio from "@/types/IStudio.interface";
-import IStudioState from "@/types/IStudioState.interface";
+import IStudio, { IStudioState } from "@/types/IStudio.interface";
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 
 const initialState: IStudioState = {

@@ -1,3 +1,4 @@
+import IInformationChange from "./IInformationChange.interface";
 export default interface IInformation {
   id?: number;
   full_name: string;
@@ -36,4 +37,8 @@ export default interface IInformation {
   power_of_attorney: string;
   director_signature: string;
   authorized_person_signature: string;
+}
+export interface IInformationState {
+  information: IInformation;
+  information_changes: IInformationChange[];
 }

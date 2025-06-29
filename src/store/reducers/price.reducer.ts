@@ -1,5 +1,4 @@
-import IPrice from "@/types/IPrice.interface";
-import IPriceState from "@/types/IPriceState.interface";
+import IPrice, { IPriceState } from "@/types/IPrice.interface";
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 
 const initialState: IPriceState = {

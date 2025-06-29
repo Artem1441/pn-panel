@@ -1,6 +1,5 @@
-import IInformation from "@/types/IInformation.interface";
+import IInformation, { IInformationState } from "@/types/IInformation.interface";
 import IInformationChange from "@/types/IInformationChange.interface";
-import IInformationState from "@/types/IInformationState.interface";
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 
 const initialState: IInformationState = {

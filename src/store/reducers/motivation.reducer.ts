@@ -1,5 +1,4 @@
-import IMotivation from "@/types/IMotivation.interface";
-import IMotivationState from "@/types/IMotivationState.interface";
+import IMotivation, { IMotivationState } from "@/types/IMotivation.interface";
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 
 const initialState: IMotivationState = {

@@ -45,3 +45,6 @@ export default interface IStudio {
   general_sublease_contact_email: string;
   general_sublease_rent_price_per_sqm: string;
 }
+export interface IStudioState {
+  studio: IStudio;
+}

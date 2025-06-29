@@ -34,7 +34,8 @@ const errors = {
   studio_short_name_required: "Краткое название студии не должно быть пустым",
   studio_date_invalid: "Дата указана некорректно",
 
-  city_short_name_required: "Название города не должно быть пустым"
+  city_short_name_required: "Название города не должно быть пустым",
+  speciality_short_name_required: "Название специальности не должно быть пустым"
 
 };
 

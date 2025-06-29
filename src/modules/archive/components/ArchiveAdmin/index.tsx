@@ -35,7 +35,7 @@ const ArchiveAdmin: FC = (): JSX.Element => {
       <button onClick={() => router.push(routes.settings_notifications)}>
         Уведомления: {total_notifications}
       </button>
-      <button onClick={() => router.push(routes.settings_specialtations)}>
+      <button onClick={() => router.push(routes.settings_specialities)}>
         Специализации
       </button>
       <button onClick={() => router.push(routes.settings_studios)}>

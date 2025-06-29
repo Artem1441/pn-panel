@@ -39,3 +39,7 @@ export type ArrayPriceClientsDataFieldKey =
   | "clients_promo_data"
   | "clients_model_data"
   | "clients_goods_data";
+
+export interface IPriceState {
+  price: IPrice;
+}

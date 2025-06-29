@@ -1,5 +1,4 @@
-import ICity from "@/types/ICity.interface";
-import ICityState from "@/types/ICityState.interface";
+import ICity, { ICityState } from "@/types/ICity.interface";
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 
 const initialState: ICityState = {
