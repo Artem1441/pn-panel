@@ -7,6 +7,7 @@ import cityReducer from "./reducers/city.reducer";
 import specialityReducer from "./reducers/speciality.reducer";
 import priceReducer from "./reducers/price.reducer";
 import generalReducer from "./reducers/general.reducer";
+import settingsReducer from "./reducers/settings.reducer";
 import motivationReducer from "./reducers/motivation.reducer";
 
 const rootReducer = combineReducers({
@@ -18,6 +19,7 @@ const rootReducer = combineReducers({
   priceReducer,
   motivationReducer,
   specialityReducer,
+  settingsReducer,
   generalReducer,
 });
 

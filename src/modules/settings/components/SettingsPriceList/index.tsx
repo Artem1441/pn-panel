@@ -122,8 +122,8 @@ const Price: FC<{
       </div>
 
       <div>
-        <h1>Для самозанятых</h1>
         <SelfEmployedTable
+          title="Для самозанятых"
           items={price.self_employed_data}
           price={price}
           fieldKey="self_employed_data"
@@ -132,8 +132,8 @@ const Price: FC<{
       </div>
 
       <div>
-        <h1>Для клиентов маникюр</h1>
         <ClientsTable
+          title="Для клиентов маникюр"
           items={price.clients_mani_data}
           price={price}
           fieldKey="clients_mani_data"
@@ -142,8 +142,8 @@ const Price: FC<{
       </div>
 
       <div>
-        <h1>Для клиентов педикюр</h1>
         <ClientsTable
+          title="Для клиентов педикюр"
           items={price.clients_pedi_data}
           price={price}
           fieldKey="clients_pedi_data"
@@ -152,8 +152,8 @@ const Price: FC<{
       </div>
 
       <div>
-        <h1>Для клиентов маникюр и педикюр в 4 руки</h1>
         <ClientsTable
+          title="Для клиентов маникюр и педикюр в 4 руки"
           items={price.clients_mani_pedi_four_hands_data}
           price={price}
           fieldKey="clients_mani_pedi_four_hands_data"
@@ -162,8 +162,8 @@ const Price: FC<{
       </div>
 
       <div>
-        <h1>Для клиентов дизайн</h1>
         <ClientsTable
+          title="Для клиентов дизайн"
           items={price.clients_design_data}
           price={price}
           fieldKey="clients_design_data"
@@ -172,8 +172,8 @@ const Price: FC<{
       </div>
 
       <div>
-        <h1>Для клиентов дополнительные услуги ногтевого сервиса</h1>
         <ClientsTable
+          title="Для клиентов дополнительные услуги ногтевого сервиса"
           items={price.clients_additional_nail_services_data}
           price={price}
           fieldKey="clients_additional_nail_services_data"
@@ -182,8 +182,8 @@ const Price: FC<{
       </div>
 
       <div>
-        <h1>Для клиентов архитектура бровей</h1>
         <ClientsTable
+          title="Для клиентов архитектура бровей"
           items={price.clients_brow_arch_data}
           price={price}
           fieldKey="clients_brow_arch_data"
@@ -192,7 +192,6 @@ const Price: FC<{
       </div>
 
       <div>
-        <h1>Для клиентов акции</h1>
         <ClientsTable
           title="Для клиентов акции"
           items={price.clients_promo_data}
@@ -203,8 +202,8 @@ const Price: FC<{
       </div>
 
       <div>
-        <h1>Для клиентов модели на маникюр</h1>
         <ClientsTable
+          title="Для клиентов модели на маникюр"
           items={price.clients_model_data}
           price={price}
           fieldKey="clients_model_data"
@@ -213,8 +212,8 @@ const Price: FC<{
       </div>
 
       <div>
-        <h1>Для клиентов товары</h1>
         <ClientsTable
+          title="Для клиентов товары"
           items={price.clients_goods_data}
           price={price}
           fieldKey="clients_goods_data"
@@ -524,13 +523,13 @@ const SettingsPriceList: FC = memo((): JSX.Element => {
         />
       </div>
 
-        <SelfEmployedTable
-          title="Для самозанятых"
-          items={price.self_employed_data}
-          price={price}
-          fieldKey="self_employed_data"
-          updateField={updatePriceField}
-        />
+      <SelfEmployedTable
+        title="Для самозанятых"
+        items={price.self_employed_data}
+        price={price}
+        fieldKey="self_employed_data"
+        updateField={updatePriceField}
+      />
       <ClientsTable
         title="Для клиентов маникюр"
         items={price.clients_mani_data}
