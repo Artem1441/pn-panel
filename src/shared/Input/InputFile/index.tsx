@@ -17,13 +17,14 @@ const EXTENSION_TO_MIME: Record<string, string> = {
   jpeg: "image/jpeg",
   png: "image/png",
   pdf: "application/pdf",
+  docx: "application/vnd.openxmlformats-officedocument.wordprocessingml.document"
 };
 
 const InputFile: FC<IProps> = memo(
   ({
     placeholder,
     onChange,
-    accept = ["jpg", "jpeg", "pdf", "png"],
+    accept = ["jpg", "jpeg", "pdf", "png", "docx"],
     maxSizeMb = constants.defaultMaxFileSizeMb,
   }): JSX.Element => {
     const inputRef = useRef<HTMLInputElement>(null);

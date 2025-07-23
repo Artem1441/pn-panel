@@ -8,7 +8,7 @@ import { notificationSlice } from "@/store/reducers/notification.reducer";
 import IUser from "@/types/IUser.interface";
 import getImageUrl from "@/utils/getImageUrl";
 import { FC, JSX, useState } from "react";
-import Alert  from "../Alert";
+import Alert from "../Alert";
 import Dialog from "../Dialog";
 import styles from "./UserInWaitingRoom.module.scss";
 
@@ -99,21 +99,13 @@ const UserInWaitingRoom: FC<IProps> = ({ user }): JSX.Element => {
       <p>Серия: {user.passport?.passport_series}</p>
       <p>Адрес проживания: {user.passport?.residential_address}</p>
       <p>Фактический адрес: {user.passport?.registration_address}</p>
-      <Image
-        src={getImageUrl(user.passport_main)}
-        width={200}
-        expandable
-      />
+      <Image src={getImageUrl(user.passport_main)} width={200} expandable />
       <Image
         src={getImageUrl(user.passport_registration)}
         width={200}
         expandable
       />
-      <Image
-        src={getImageUrl(user.photo_front)}
-        width={200}
-        expandable
-      />
+      <Image src={getImageUrl(user.photo_front)} width={200} expandable />
 
       <button onClick={confirm}>Подтвердить</button>
       <button onClick={() => setIsShowDialog(true)}>
