@@ -1,13 +1,17 @@
 import apiAuthConfirmEmployeeForm from "@/api/auth/apiAuthConfirmEmployeeForm.api";
+import apiAuthGetSpecialitiesAndStudios from "@/api/auth/apiAuthGetSpecialitiesAndStudios.api";
 import apiAuthRefuseEmployeeForm from "@/api/auth/apiAuthRefuseEmployeeForm.api";
 import apiNotificationAdminGetAll from "@/api/notification/apiNotificationAdminGetAll.api";
 import { useAppDispatch } from "@/hooks/useAppDispatch";
 import Image from "@/shared/Image";
 import Input from "@/shared/Input";
+import InputMultiSelectCustom from "@/shared/Input/InputMultiSelect";
 import { notificationSlice } from "@/store/reducers/notification.reducer";
+import ISpeciality from "@/types/ISpeciality.interface";
+import IStudio from "@/types/IStudio.interface";
 import IUser from "@/types/IUser.interface";
 import getImageUrl from "@/utils/getImageUrl";
-import { FC, JSX, useState } from "react";
+import { FC, JSX, useEffect, useState } from "react";
 import Alert from "../Alert";
 import Dialog from "../Dialog";
 import styles from "./UserInWaitingRoom.module.scss";
@@ -18,9 +22,25 @@ interface IProps {
 
 const UserInWaitingRoom: FC<IProps> = ({ user }): JSX.Element => {
   const dispatch = useAppDispatch();
+  const [specialityIdAndStudiosIds, setSpecialityIdAndStudiosIds] = useState<{
+    speciality_id: null | ISpeciality["id"];
+    studio_ids: IStudio["id"][];
+  }>({ speciality_id: null, studio_ids: [] });
+  const [specialities, setSpecialities] = useState<ISpeciality[]>([]);
+  const [studios, setStudios] = useState<IStudio[]>([]);
   const { setAdminNotificationsAction } = notificationSlice.actions;
-  const [isShowDialog, setIsShowDialog] = useState<boolean>(false);
+  const [isShowConfirmationDialog, setIsShowConfirmationDialog] =
+    useState<boolean>(false);
+  const [isShowRejectDialog, setIsShowRejectDialog] = useState<boolean>(false);
   const [rejectionReason, setRejectionReason] = useState<string>("");
+
+  const getSpecialitiesAndStudios = async () => {
+    const res = await apiAuthGetSpecialitiesAndStudios();
+    if (res.status && res.data) {
+      setSpecialities(res.data?.specialities);
+      setStudios(res.data?.studios);
+    }
+  };
 
   const refreshNotificationAdminGetAll = async () => {
     const res = await apiNotificationAdminGetAll();
@@ -35,7 +55,23 @@ const UserInWaitingRoom: FC<IProps> = ({ user }): JSX.Element => {
   };
 
   const confirm = async () => {
-    const res = await apiAuthConfirmEmployeeForm({ id: user.id });
+    if (!specialityIdAndStudiosIds.speciality_id) {
+      return Alert.show({
+        title: "Выберите специальность мастеру",
+        icon: "error",
+      });
+    } else if (!specialityIdAndStudiosIds.studio_ids.length) {
+      return Alert.show({
+        title: "Выберите студии для мастера",
+        icon: "error",
+      });
+    }
+
+    const res = await apiAuthConfirmEmployeeForm({
+      id: user.id,
+      speciality_id: specialityIdAndStudiosIds.speciality_id,
+      studio_ids: specialityIdAndStudiosIds.studio_ids,
+    });
 
     if (res.status) {
       Alert.show({
@@ -65,7 +101,7 @@ const UserInWaitingRoom: FC<IProps> = ({ user }): JSX.Element => {
       rejectionReason,
     });
     if (res.status) {
-      setIsShowDialog(false);
+      setIsShowRejectDialog(false);
       setRejectionReason("");
       Alert.show({
         title: "Анекта отклонена",
@@ -80,6 +116,15 @@ const UserInWaitingRoom: FC<IProps> = ({ user }): JSX.Element => {
       });
     }
   };
+
+  useEffect(() => {
+    if (isShowConfirmationDialog) {
+      getSpecialitiesAndStudios();
+    } else {
+      setSpecialities([]);
+      setStudios([]);
+    }
+  }, [isShowConfirmationDialog]);
 
   return (
     <div className={styles.userInWaitingRoom}>
@@ -107,13 +152,53 @@ const UserInWaitingRoom: FC<IProps> = ({ user }): JSX.Element => {
       />
       <Image src={getImageUrl(user.photo_front)} width={200} expandable />
 
-      <button onClick={confirm}>Подтвердить</button>
-      <button onClick={() => setIsShowDialog(true)}>
+      <button onClick={() => setIsShowConfirmationDialog(true)}>
+        Подтвердить
+      </button>
+      <button onClick={() => setIsShowRejectDialog(true)}>
         Отправить на переподтверждение
       </button>
 
-      {isShowDialog && (
-        <Dialog closeAction={() => setIsShowDialog(false)}>
+      {isShowConfirmationDialog && (
+        <Dialog closeAction={() => setIsShowConfirmationDialog(false)}>
+          <Input
+            type="select"
+            placeholder="Выберите специальность"
+            value={String(specialityIdAndStudiosIds.speciality_id || "")}
+            onChange={(e) =>
+              setSpecialityIdAndStudiosIds({
+                ...specialityIdAndStudiosIds,
+                speciality_id: Number(e.target.value),
+              })
+            }
+            options={specialities.map((speciality: ISpeciality) => ({
+              label: speciality.name,
+              value: String(speciality.id),
+            }))}
+          />
+
+          <Input
+            type="multi-select"
+            placeholder="Выберите студии"
+            value={specialityIdAndStudiosIds.studio_ids.map(String)}
+            onChange={(e) => {
+              setSpecialityIdAndStudiosIds({
+                ...specialityIdAndStudiosIds,
+                studio_ids: (e.target.value as unknown as string[]).map(Number),
+              });
+            }}
+            options={studios?.map((studio) => ({
+              label: studio.name,
+              value: String(studio.id),
+            }))}
+          />
+
+          <button onClick={confirm}>Отправить</button>
+        </Dialog>
+      )}
+
+      {isShowRejectDialog && (
+        <Dialog closeAction={() => setIsShowRejectDialog(false)}>
           <Input
             placeholder="Опишите причину, почему не подошла анкета"
             type="textarea"

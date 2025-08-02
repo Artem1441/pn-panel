@@ -15,29 +15,39 @@ const HomeAdmin: FC = (): JSX.Element => {
     (state) => state.notificationReducer
   );
 
-
   const notificationAdminGetAllCount = async () => {
     const res = await apiNotificationGetAllCounts();
-    if (!res.status) return
-    dispatch(setTotalNotificationsAction(res.data || {admin: 0, archive: 0, settings: 0}));
+    if (!res.status) return;
+    dispatch(
+      setTotalNotificationsAction(
+        res.data || { admin: 0, archive: 0, settings: 0 }
+      )
+    );
   };
 
   useEffect(() => {
     notificationAdminGetAllCount();
   }, []);
 
-  console.log(total_notifications)
-
   return (
     <>
       <div>
-        <button onClick={() => router.push(routes.admin)}>Администрирование {total_notifications.admin !== 0 && total_notifications.admin}</button>
+        <button onClick={() => router.push(routes.admin)}>
+          Администрирование{" "}
+          {total_notifications.admin !== 0 && total_notifications.admin}
+        </button>
       </div>
       <div>
-        <button onClick={() => router.push(routes.settings)}>Настройки {total_notifications.settings !== 0 && total_notifications.settings}</button>
+        <button onClick={() => router.push(routes.settings)}>
+          Настройки{" "}
+          {total_notifications.settings !== 0 && total_notifications.settings}
+        </button>
       </div>
       <div>
-        <button onClick={() => router.push(routes.archive)}>Архив {total_notifications.archive !== 0 && total_notifications.archive}</button>
+        <button onClick={() => router.push(routes.archive)}>
+          Архив{" "}
+          {total_notifications.archive !== 0 && total_notifications.archive}
+        </button>
       </div>
     </>
   );

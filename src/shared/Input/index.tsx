@@ -7,6 +7,7 @@ import InputFile from "./InputFile";
 import UploadFileType from "@/types/UploadFileType.type";
 import InputSelect from "./InputSelect";
 import InputBoolean from "./InputBoolean";
+import InputMultiSelect from "./InputMultiSelect";
 
 interface IProps {
   type?:
@@ -17,9 +18,10 @@ interface IProps {
     | "textarea"
     | "file"
     | "select"
-    | "boolean";
+    | "boolean"
+    | "multi-select";
   placeholder: string;
-  value: string | boolean;
+  value: string | string[] | boolean;
   onChange: (
     e: React.ChangeEvent<
       HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement
@@ -47,6 +49,20 @@ const Input: FC<IProps> = memo(
             value={value}
             placeholder={placeholder}
             onChange={onChange}
+          />
+        );
+      }
+      return <></>;
+    }
+
+    if (Array.isArray(value)) {
+      if (type === "multi-select") {
+        return (
+          <InputMultiSelect
+            value={value}
+            placeholder={placeholder}
+            onChange={onChange}
+            options={options|| []}
           />
         );
       }

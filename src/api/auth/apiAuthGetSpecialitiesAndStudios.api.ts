@@ -4,29 +4,25 @@ import ISpeciality from "@/types/ISpeciality.interface";
 import IStudio from "@/types/IStudio.interface";
 import axios from "axios";
 
-const apiAuthConfirmEmployeeForm = async ({
-  id,
-  speciality_id,
-  studio_ids,
-}: {
-  id: number;
-  speciality_id: ISpeciality["id"];
-  studio_ids: IStudio["id"][];
-}): Promise<IResp<null>> => {
+const apiAuthGetSpecialitiesAndStudios = async (): Promise<
+  IResp<{specialities: ISpeciality[], studios: IStudio[]}>
+> => {
   try {
-    await axios.post(
-      `${process.env.NEXT_PUBLIC_BACKEND_URL}/auth/confirmEmployeeForm`,
-      {
-        id,
-        speciality_id,
-        studio_ids,
-      },
+    const response = await axios.get<IResp<{specialities: ISpeciality[], studios: IStudio[]}>>(
+      `${process.env.NEXT_PUBLIC_BACKEND_URL}/auth/getSpecialitiesAndStudios`,
       {
         withCredentials: true,
       }
     );
 
-    return { status: true };
+    if (response.data.status) {
+      return response.data;
+    } else {
+      return {
+        status: false,
+        error: response.data.error || errors.unknown_error,
+      };
+    }
   } catch (err) {
     if (axios.isAxiosError(err)) {
       return {
@@ -42,4 +38,4 @@ const apiAuthConfirmEmployeeForm = async ({
   }
 };
 
-export default apiAuthConfirmEmployeeForm;
+export default apiAuthGetSpecialitiesAndStudios;

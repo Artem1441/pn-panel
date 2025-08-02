@@ -24,6 +24,11 @@ const routes = {
 
   expired: "/expired",
 
+  clients: "/clients",
+  payments: "/payments",
+  docs: "/docs",
+  personal: "/personal",
+
 };
 
 export default routes;

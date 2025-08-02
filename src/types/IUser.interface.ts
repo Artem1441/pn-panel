@@ -2,6 +2,7 @@ import RoleType from "./RoleType.type";
 
 export default interface IUser {
   id: number;
+  speciality_id?: number;
   role: RoleType;
   login: string;
   password: string;
@@ -44,8 +45,6 @@ export default interface IUser {
   equipments?: any; // JSONB, can be typed more strictly if structure is known
   ycl_staff_id?: number;
   agent_percent?: number;
-  speciality_id?: number;
-  studio_id?: number;
   passport_main?: string;
   passport_registration?: string;
   photo_front?: string;
