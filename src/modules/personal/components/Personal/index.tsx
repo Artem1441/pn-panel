@@ -1,31 +1,34 @@
-import apiPersonalGetPersonalData from "@/api/personal/apiPersonalGetPersonalData.api";
-import Image from "@/shared/Image";
-import Input from "@/shared/Input";
-import ISpeciality from "@/types/ISpeciality.interface";
-import IStudio from "@/types/IStudio.interface";
-import IUser from "@/types/IUser.interface";
-import getImageUrl from "@/utils/getImageUrl";
-import { FC, JSX, useEffect, useState } from "react";
+import apiPersonalChangePassword from "@/api/personal/apiPersonalChangePassword.api"
+import apiPersonalGetPersonalData from "@/api/personal/apiPersonalGetPersonalData.api"
+import Alert from "@/components/Alert"
+import Image from "@/shared/Image"
+import Input from "@/shared/Input"
+import ISpeciality from "@/types/ISpeciality.interface"
+import IStudio from "@/types/IStudio.interface"
+import IUser from "@/types/IUser.interface"
+import checkPasswordStrength from "@/utils/checkPasswordStrength"
+import getImageUrl from "@/utils/getImageUrl"
+import { FC, JSX, useEffect, useState } from "react"
 
 interface IPersonalData {
-  surname: IUser["surname"];
-  name: IUser["name"];
-  patronymic: IUser["patronymic"];
-  inn: IUser["inn"];
-  phone: IUser["phone"];
-  email: IUser["email"];
-  passport: IUser["passport"];
-  bank_acc: IUser["bank_acc"];
-  bank_bik: IUser["bank_bik"];
-  passport_main: IUser["passport_main"];
-  passport_registration: IUser["passport_registration"];
-  photo_front: IUser["photo_front"];
-  login: IUser["login"];
-  speciality_name: ISpeciality["name"];
+  surname: IUser["surname"]
+  name: IUser["name"]
+  patronymic: IUser["patronymic"]
+  inn: IUser["inn"]
+  phone: IUser["phone"]
+  email: IUser["email"]
+  passport: IUser["passport"]
+  bank_acc: IUser["bank_acc"]
+  bank_bik: IUser["bank_bik"]
+  passport_main: IUser["passport_main"]
+  passport_registration: IUser["passport_registration"]
+  photo_front: IUser["photo_front"]
+  login: IUser["login"]
+  speciality_name: ISpeciality["name"]
   studios: {
-    name: IStudio["name"];
-    general_wifi_password?: IStudio["general_wifi_password"];
-  }[];
+    name: IStudio["name"]
+    general_wifi_password?: IStudio["general_wifi_password"]
+  }[]
 }
 
 const Personal: FC = (): JSX.Element => {
@@ -54,19 +57,48 @@ const Personal: FC = (): JSX.Element => {
     login: "",
     speciality_name: "",
     studios: [],
-  });
+  })
   const [currentPassword, setCurrentPassword] = useState<string>("")
   const [newPassword, setNewPassword] = useState<string>("")
+
   const getPersonalData = async () => {
-    const res = await apiPersonalGetPersonalData<IPersonalData>();
+    const res = await apiPersonalGetPersonalData<IPersonalData>()
     if (res.status && res.data) {
-      setPersonalData(res.data);
+      setPersonalData(res.data)
     }
-  };
+  }
+
+  const changePassword = async () => {
+    const isValid = checkPasswordStrength(newPassword)
+    if (!isValid?.status) {
+      Alert.show({
+        title: "Ошибка",
+        text: isValid.error,
+        icon: "error",
+      })
+      return
+    }
+    const res = await apiPersonalChangePassword({
+      currentPassword,
+      newPassword,
+    })
+    if (res.status) {
+      Alert.show({
+        title: "Пароль изменён",
+        icon: "success",
+      })
+    } else {
+      Alert.show({
+        title: "Ошибка",
+        text: res.error,
+        icon: "error",
+      })
+    }
+  }
 
   useEffect(() => {
-    getPersonalData();
-  }, []);
+    getPersonalData()
+  }, [])
 
   return (
     <>
@@ -119,12 +151,24 @@ const Personal: FC = (): JSX.Element => {
       <div>
         <p>Сброс пароля</p>
 
-        {/* <Input 
-        
-        /> */}
+        <Input
+          type="password"
+          placeholder="Введите текущий пароль"
+          value={currentPassword}
+          onChange={(e) => setCurrentPassword(e.target.value)}
+        />
+
+        <Input
+          type="password"
+          placeholder="Введите новый пароль"
+          value={newPassword}
+          onChange={(e) => setNewPassword(e.target.value)}
+        />
+
+        <button onClick={changePassword}>Сменить</button>
       </div>
     </>
-  );
-};
+  )
+}
 
-export default Personal;
+export default Personal
