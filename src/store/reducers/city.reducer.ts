@@ -4,6 +4,7 @@ import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 const initialState: ICityState = {
   city: {
     name: "",
+    city_code: ""
   },
 };
 

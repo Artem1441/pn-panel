@@ -5,14 +5,17 @@ import axios from "axios";
 
 const apiCityCreateCity = async ({
   name,
+  city_code
 }: {
   name: ICity["name"];
+  city_code: ICity["city_code"]
 }): Promise<IResp<null>> => {
   try {
     const response = await axios.post<IResp<null>>(
       `${process.env.NEXT_PUBLIC_BACKEND_URL}/city/createCity`,
       {
         name,
+        city_code
       },
       {
         withCredentials: true,

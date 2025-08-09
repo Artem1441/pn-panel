@@ -6,9 +6,11 @@ import axios from "axios";
 const apiCityUpdateCity = async ({
   id,
   name,
+  city_code
 }: {
   id: ICity["id"]
   name: ICity["name"];
+  city_code: ICity["city_code"]
 }): Promise<IResp<null>> => {
   try {
     const response = await axios.put<IResp<null>>(
@@ -16,6 +18,7 @@ const apiCityUpdateCity = async ({
       {
         id,
         name,
+        city_code
       },
       {
         withCredentials: true,
