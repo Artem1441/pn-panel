@@ -12,7 +12,7 @@ const HomeSpecialist: FC = (): JSX.Element => {
         <button onClick={() => router.push(routes.clients)}>Клиенты</button>
       </div>
       <div>
-        <button onClick={() => router.push(routes.payments)}>Настройки</button>
+        <button onClick={() => router.push(routes.payments)}>Платежи</button>
       </div>
       <div>
         <button onClick={() => router.push(routes.docs)}>Документы</button>
